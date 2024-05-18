@@ -29,7 +29,7 @@ const Feed = () => {
         </Typography>
       </Box>
       <Box p={2} sx={{ overflowY: 'auto', height: '90vh', flex: 2 }}>
-        <Typography variant='h4' fontWeight='bold' mb={2} sx={{ color: '#663399'}}>
+        <Typography variant='h4' fontWeight='bold' mb={2} sx={{ color: '#ff0000'}}>
           {selectedCategory}
           <span
             style={{color:'wheat' , marginLeft: '10px'}} >
