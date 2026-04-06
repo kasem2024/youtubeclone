@@ -1,22 +1,32 @@
-import React from "react";
-import { Stack, Box } from "@mui/material";
+import { Box, Grid } from "@mui/material";
+import VideoCard from "./VideoCard";
 
-import { ChannelCard, Loader, VideoCard } from "./";
+const Videos = ({ videos }) => {
+  if (!videos) return null;
 
-const Videos = ({ videos, direction }) => {
-  if (!videos?.length) return <Loader />;
-  
   return (
-    <Stack direction={direction || "row"} flexWrap="wrap" justifyContent="center" alignItems="center" gap={2.2}>
-      {videos.map((item, idx) => (
-        <Box key={idx}>
-          {item?.id?.videoId && <VideoCard video={item} /> }
-          {item?.id?.channelId && <ChannelCard channelDetail={item} />}
-        </Box>
-      ))}
-    </Stack>
-  )
-}
+    <Box sx={{ width: "100%", maxWidth: "100vw", overflowX: "hidden" }}>
+      <Grid
+        container
+        spacing={{ xs: 1, sm: 2, md: 3 }}
+        sx={{ justifyContent: "center" }}
+      >
+        {videos.map((video, index) => (
+          <Grid
+            item
+            key={video?.id?.videoId || index}
+            xs={12} // 1 column on mobile
+            sm={12} // still 1 column
+            md={6} // 2 columns
+            lg={4} // 3 columns
+            xl={3} // 4 columns
+          >
+            <VideoCard video={video} />
+          </Grid>
+        ))}
+      </Grid>
+    </Box>
+  );
+};
 
 export default Videos;
-

@@ -1,46 +1,102 @@
-import React from 'react'
-import { Box, CardContent, Typography } from '@mui/material';
-import { CheckCircle } from '@mui/icons-material';
-import { Link } from 'react-router-dom';
-import { demoChannelTitle, demoProfilePicture } from '../utils/constants';
+import { Box, CardContent, Typography, Avatar } from "@mui/material";
+import { CheckCircle } from "@mui/icons-material";
+import { Link } from "react-router-dom";
+import { demoChannelTitle, demoProfilePicture } from "../utils/constants";
+
 const ChannelCard = ({ channelDetail, marginTop }) => {
-  console.log(channelDetail?.snippet?.thumbnails?.high?.url)
+  const channelId = channelDetail?.id?.channelId;
+  const snippet = channelDetail?.snippet;
+
   return (
     <Box
       sx={{
-        boxShadow: 'none',
-        borderRadius: '20px',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        width: { xs: '356px', md: '320px' },
-        height: '326px',
-        margin: 'auto',
-        marginTop,}}>
-      <Link to={`/channel/${channelDetail?.id?.channelId}`}>
-        <CardContent
-          sx={{ display: 'flex', flexDirection: "column", justifyContent: 'center', alignItems: 'center', color:'wheat'}}
+        width: { xs: "100%", sm: "320px" },
+        mx: "auto",
+        mt: marginTop,
+      }}
+    >
+      <Link to={`/channel/${channelId}`} style={{ textDecoration: "none" }}>
+        <Box
+          sx={{
+            borderRadius: "20px",
+            p: 3,
+            backgroundColor: "#181818",
+            transition: "all 0.3s ease",
+            cursor: "pointer",
+            textAlign: "center",
+            "&:hover": {
+              transform: "translateY(-8px)",
+              boxShadow: "0 15px 30px rgba(0,0,0,0.5)",
+              backgroundColor: "#202020",
+            },
+          }}
         >
-          <img
-          src={channelDetail?.snippet?.thumbnails?.high?.url || demoProfilePicture}
-          alt={channelDetail?.snippet?.title}
-          style={{ borderRadius: '50%', height: '180%', width: '180px', mb: 2, border: '1px solid #e3e3e3' }} />
-          <Typography variant="h6">
-            {channelDetail?.snippet?.title || demoChannelTitle }
-            <CheckCircle  sx={{fontSize:14 , color:'gray' , ml:'5px'}}/>
-          </Typography>
-          {channelDetail?.statistics?.subscriberCount && (
-            <Typography>
-              {parseInt(channelDetail?.statistcs?.subscriberCount).toLocaleString()} Subscribers
+          <Box
+            sx={{
+              width: 110,
+              height: 110,
+              borderRadius: "50%",
+              margin: "0 auto 16px",
+              padding: "3px",
+              background:
+                "conic-gradient(from 0deg, #ff0000, #ff7b00, #ffd700, #ff0000)",
+              animation: "rotate 4s linear infinite",
+              "@keyframes rotate": {
+                "0%": { transform: "rotate(0deg)" },
+                "100%": { transform: "rotate(360deg)" },
+              },
+            }}
+          >
+            <Avatar
+              src={snippet?.thumbnails?.high?.url || demoProfilePicture}
+              alt={snippet?.title}
+              sx={{
+                width: "100%",
+                height: "100%",
+                border: "2px solid #181818",
+              }}
+            />
+          </Box>
+
+          <CardContent sx={{ p: 0 }}>
+            {/* Channel Title */}
+            <Typography
+              variant="h6"
+              sx={{
+                color: "#fff",
+                fontWeight: 600,
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                gap: "6px",
+                textAlign: "center",
+              }}
+            >
+              {snippet?.title || demoChannelTitle}
+              <CheckCircle sx={{ fontSize: 16, color: "#aaa" }} />
             </Typography>
-          )}
-        </CardContent>
+
+            {/* Subscriber Count */}
+            {channelDetail?.statistics?.subscriberCount && (
+              <Typography
+                sx={{
+                  fontSize: "14px",
+                  color: "#aaa",
+                  mt: 1,
+                  textAlign: "center",
+                }}
+              >
+                {parseInt(
+                  channelDetail.statistics.subscriberCount,
+                ).toLocaleString()}{" "}
+                subscribers
+              </Typography>
+            )}
+          </CardContent>
+        </Box>
       </Link>
     </Box>
-  )
-}
+  );
+};
 
-export default ChannelCard
-
-
-//https://yt3.ggpht.com/wg1TITEoPfxvBGfzuqWyt3bqm_qu35ZhMswUv3feetU3xNX_6wsAXZF40OlPIgY4TmqbqCmAZ1U=s800-c-k-c0xffffffff-no-rj-mo
+export default ChannelCard;

@@ -3,13 +3,22 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  overflow-x: hidden;
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+/* 🔗 LINKS */
 a {
   text-decoration: none;
   color: black;
 }
 
+/* 🔧 SCROLLBAR */
 ::-webkit-scrollbar {
   width: 0px;
   height: 5px;
@@ -18,74 +27,64 @@ a {
 ::-webkit-scrollbar-thumb {
   background-color: rgb(114, 113, 113);
   border-radius: 10px;
-  height: 200px;
 }
 
 ::-webkit-scrollbar-track {
   background-color: transparent;
 }
 
-.category-btn:hover {
-  background-color: #ffffff !important;
-  color: rgb(0, 0, 0) !important;
-}
-
-.category-btn:hover span{
-  color: rgb(0, 0, 0) !important;
-}
-
+/* 🎬 REACT PLAYER */
 .react-player {
   height: 77vh !important;
-  width: 100% !important;
+  max-width: 100% !important;
 }
 
-.search-bar{
-  border:none;
-  outline:none;
-  width:350px;
-}
-
-.category-btn{
+/* 🎯 CATEGORY BUTTON */
+.category-btn {
   font-weight: bold !important;
   text-transform: capitalize;
   display: flex;
   align-items: center;
   justify-content: start;
-  cursor:pointer;
+  cursor: pointer;
   background: transparent;
   outline: none;
   border: none;
   padding: 7px 15px;
-  margin: 10px 0px;
+  margin: 5px 0;
   border-radius: 20px;
-  transition: all 0.5s ease-out;
-  -webkit-transition: all 0.5s ease-out;
-  -moz-transition: all 0.5s ease-out;
-  -ms-transition: all 0.5s ease-out;
-  -o-transition: all 0.5s ease-out;
+  transition: all 0.3s ease;
 }
 
+.category-btn:hover {
+  background-color: #ffffff !important;
+  color: black !important;
+}
+
+.category-btn:hover span {
+  color: black !important;
+}
+
+/* 📱 RESPONSIVE FIXES */
 @media screen and (max-width: 900px) {
-  .category-btn{
-    margin: 10px;
+  .category-btn {
+    margin: 5px;
   }
 }
 
-@media screen and (max-width:800px){
-  .copyright{
-    display:none !important;
+@media screen and (max-width: 800px) {
+  .copyright {
+    display: none !important;
   }
 }
 
 @media screen and (max-width: 600px) {
   .scroll-horizontal {
-    overflow: auto !important;
+    overflow-x: auto !important;
+    overflow-y: hidden;
   }
 
   .react-player {
     height: 45vh !important;
-  }
-  .search-bar{
-    width:200px;
   }
 }
